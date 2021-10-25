@@ -5,40 +5,28 @@ module TennisSpec
 import           Test.Hspec
 import           Test.QuickCheck
 
-import qualified Data.List                     as L
+------------------
+---   CODE     ---
+------------------
 
-data Point = P1 | P2 deriving (Eq)
-
-data Game = Game [Point]
-
-mkGame :: Game
-mkGame = Game mempty
+data Game
+data Point = P1 | P2
 
 point :: Game -> Point -> Game
-point (Game ps) p = Game (p : ps)
+point = undefined
+
+mkGame :: Game
+mkGame = undefined
 
 score :: Game -> String
-score (Game points) = if ps1 == 4
-  then "Game P1"
-  else if ps2 == 4
-    then "Game P2"
-    else (scoreText ps1) <> " - " <> (scoreText ps2)
- where
-  (ps1', ps2') = L.partition (== P1) points
-  ps1          = length ps1'
-  ps2          = length ps2'
+score = undefined
 
-scoreText :: Int -> String
-scoreText 0 = "love"
-scoreText 1 = "15"
-scoreText 2 = "30"
-scoreText 3 = "40"
-scoreText _ = undefined
-
+------------------
+---   TEST     ---
+------------------
 
 shouldScore :: [Point] -> String -> Expectation
 shouldScore ps expected = (score $ foldl point mkGame ps) `shouldBe` expected
-
 
 spec :: Spec
 spec = do
