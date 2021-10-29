@@ -9,17 +9,33 @@ import           Test.QuickCheck
 ---   CODE     ---
 ------------------
 
-data Game
+data Game = Game
+  { player1 :: Int
+  , player2 :: Int
+  }
 data Point = P1 | P2
 
 point :: Game -> Point -> Game
-point = undefined
+point game P1 = game { player1 = 1 + (player1 game) }
+point game P2 = Game (player1 game) (succ (player2 game))
+
 
 mkGame :: Game
-mkGame = undefined
+mkGame = Game 0 0
 
 score :: Game -> String
-score = undefined
+score x = toString (player1 x) <> " - " <> toString (player2 x)
+
+toString 0 = "love"
+toString 1 = "15"
+toString 2 = "30"
+toString 3 = "40"
+
+
+
+
+
+
 
 ------------------
 ---   TEST     ---
@@ -31,7 +47,7 @@ shouldScore ps expected = (score $ foldl point mkGame ps) `shouldBe` expected
 spec :: Spec
 spec = do
   describe "scoring" $ do
-    describe "x - love" $ do
+    focus $ describe "x - love" $ do
       it "starts with love" $ do
         [] `shouldScore` "love - love"
       it "a point is 15" $ do
