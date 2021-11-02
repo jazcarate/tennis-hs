@@ -12,4 +12,6 @@ The scoring system is rather simple:
     If the player without advantage wins they are back at deuce.
 
 ## Development
-`$ ghcid --command="stack ghci test/Main.hs" --test=main`
+1. Install [stack](https://docs.haskellstack.org/en/stable/README/)
+1. Install [ghcid]: `$ stack install ghcid`
+1. Run the compiler and tests on watch: `$ ghcid --command="stack ghci test/Main.hs" --test=main`
